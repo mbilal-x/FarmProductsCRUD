@@ -49,6 +49,8 @@ app.get('/products/:id', async (req, res)=>{
     const product = await Product.findById(id)
     res.render('products/details', {product})
 })
+// edit a product
+
 
 
 
