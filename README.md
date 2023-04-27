@@ -41,8 +41,17 @@ video 412 - deleting products
 
 
 video 413 - BONUS: filtering by category
-    - products?query=dairy
-    - on the details template add a link to category /products/?query=p.category
-    - in /products and query handling if query exists find products with a specific category, otherwise find all products and render then. pass products and category to the template and finish up any loose ends, like the title of template.
-    
+    - products?query=dairy      [done]
+    - on the details template add a link to category /products/?query=p.category    [done]
+    - in /products and query handling if query exists find products with a specific category, otherwise find all products and render then. pass products and category to the template and finish up any loose ends, like the title of template.    [done]
+
     [Section finished]
+
+
+## A few problems in the code:
+
+    - categories are not pre-selected properly on edit.ejs
+
+    - any new vegetable entry in not validated by the models
+
+    - a new category added to js array is not implemented in the mongo model enum previously defined.
