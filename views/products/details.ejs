@@ -15,6 +15,12 @@
         <li>price: <%= product.price %></li>
     </ul>
     <a href="http://localhost:3000/products">All Products</a>
+    <br>
+    <a href="http://localhost:3000/products/<%= product._id %>/edit">edit this product</a>
+    <br>
+    <form action="/products/<%=product._id%>?_method=Delete" method="POST">
+        <button>Delete this Product</button>
+    </form>
     
 </body>
 </html>

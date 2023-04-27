@@ -3,6 +3,7 @@ const app = express()
 const mongoose = require('mongoose')
 const path = require('path')
 const ejs = require('ejs')
+const methodOverride = require('method-override')
 
 const Product = require('./models/product')
 
@@ -21,6 +22,7 @@ app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
 
 app.use(express.urlencoded({extended: true}))
+app.use(methodOverride('_method'))
 
 //RESTful routes
 app.get('/', (req, res)=>{
@@ -41,7 +43,7 @@ app.post('/products', async (req, res)=>{
     const newProduct = new Product(req.body)
     await newProduct.save()
     res.redirect('/products')
-}) 
+})  
 
 // show a specific product by id
 app.get('/products/:id', async (req, res)=>{
@@ -50,7 +52,24 @@ app.get('/products/:id', async (req, res)=>{
     res.render('products/details', {product})
 })
 // edit a product
+app.get('/products/:id/edit', async (req, res)=>{
+    const {id} = req.params
+    const product = await Product.findById(id)
+    res.render('products/edit', {product})
+})
+app.put('/products/:id', async (req, res)=>{
+    const {id} = req.params
+    const product = await Product.findByIdAndUpdate(id, req.body, {runValidator: true, new: true})
+    product.save()
+    res.redirect('/products')
+})
 
+// deleting a product
+app.delete('/products/:id', async (req, res)=>{
+    const {id} = req.params
+    const product = await Product.findByIdAndDelete(id)
+    res.redirect('/products')
+})
 
 
 
